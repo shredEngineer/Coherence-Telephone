@@ -4,7 +4,8 @@ def run_enhanced_simulation():
     gamma = 2.0           # Decoherence rate (How fast the signal fades)
     J_coupling = 5.0      # Coupling strength (How hard we drive the link)
     # -------------------------------------------
-
+J_coupling = 10.0
+gamma      = 0.2
     # ... rest of my code ...
 
 """
