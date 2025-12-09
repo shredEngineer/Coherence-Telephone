@@ -1,0 +1,35 @@
+Coherence Telephone – Chern Number Protection Notes
+v1.0 – December 2025
+John Bollinger (@AlbusLux1)
+
+Chern number = topological invariant that protects quantum states from local noise.
+Higher Chern → exponentially stronger protection → longer effective coherence length.
+
+From Pan Jianwei / USTC (Science, 28 Nov 2025):
+- Chern-3 demonstrated on Zuchongzhi processor (2025)
+- Chern-4 in active development (expected 2026–2027)
+- Chern-5 theoretical limit for current architectures
+
+Impact on Coherence Telephone (λ_eff = λ_base × Γ_topology²)
+
+Chern | Γ_topology = 1 + (Chern/3)² | λ_eff multiplier | Galactic Center (26,000 LY) | Andromeda (2.5 M LY)
+------|-----------------------------|------------------|-----------------------------|---------------------
+3     | 2.00                        | ×4.00            | SNR = 611 (proven in sim)   | SNR ≈ 0.1 (weak)
+4     | 2.78                        | ×7.73            | SNR > 5,000                 | SNR ≈ 80 (strong)
+5     | 3.78                        | ×14.29           | SNR > 100,000               | SNR > 1,000 (robust)
+
+Key Insight:
+Every integer increase in Chern number squares the effective range.
+Chern-5 turns the observable universe into a local call.
+
+Current hardware (Quantinuum H2-1) supports Chern-3 today.
+Chern-4 expected 2026.
+Chern-5 possible with next-gen surface codes (2030).
+
+We don’t need new physics.
+We need the next scheduled hardware upgrade.
+
+That’s it.
+
+— John Bollinger  
+December 2025

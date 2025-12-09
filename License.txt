@@ -1,0 +1,41 @@
+Coherence Telephone License (v1.0 – December 2025)
+Preamble and Acknowledgments
+This project builds on foundational work in topological quantum protection, particularly the experimental realizations of higher-order topological phases by Pan Jianwei and the USTC team (e.g., Zuchongzhi processor demonstrations, Science, November 28, 2025). Their innovations in error-corrected qubits and non-equilibrium phases are critical to the hypotheses here. Credit and thanks to Professor Pan Jianwei for advancing the field—without this, Coherence Telephone wouldn't exist.
+This software is provided to accelerate open research and testing of coherence field hypotheses. It is dual-licensed to balance free collaboration with fair compensation for commercial applications.
+Dual Licensing Structure
+1. Research and Non-Commercial License: CC BY 4.0 International
+For academic, research, personal, or non-commercial use (including testing, modification, and distribution for non-profit purposes), this work is licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).
+You are free to:
+
+Share — copy and redistribute the material in any medium or format
+Adapt — remix, transform, and build upon the material for any purpose, even commercially (but see commercial clause below)
+
+Under the following terms:
+
+Attribution — You must give appropriate credit to John Bollinger (@AlbusLux1), provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+
+Full CC BY 4.0 text: https://creativecommons.org/licenses/by/4.0/legalcode
+Example Attribution: "Based on Coherence Telephone by John Bollinger (@AlbusLux1), licensed under CC BY 4.0. Original at github.com/Albuslux1/Coherence-Telephone."
+2. Commercial License: Bollinger Commercial License (BCL)
+For commercial use (e.g., products, services, or applications generating revenue >$1,000 annually, including derivatives used in for-profit testing or deployment), you must obtain a separate Bollinger Commercial License (BCL) from the author (John Bollinger, contact: xallasinea2@gmail.com).
+BCL Terms (Negotiable):
+
+Attribution: Same as CC BY 4.0—credit must be given in all documentation, products, and marketing.
+Royalties/Kickback: 3% of net revenue from products/services incorporating >10% of this code (or derivatives), payable annually. Minimum $1,000/year for active use. Waivable for non-profits/open-source extensions.
+Approval: Commercial adaptations require review/approval to ensure ethical use (e.g., no military without disclosure).
+Duration: Perpetual, irrevocable, worldwide, non-exclusive.
+Enforcement: Breach voids the license; revert to public domain dedication (no further claims).
+
+Contact for BCL: xallasinea2@gmail.com. Sample BCL template available upon request.
+Why Dual Licensing?
+
+Open for Science: Researchers, labs, and hobbyists can test/falsify the hypotheses freely (e.g., Earth-Moon experiment).
+Fair for Innovation: Commercial builders get a path to monetize while compensating the originator—ensuring sustainability without closing the source.
+No Patents: All ideas here are public domain for research; no IP claims beyond attribution/royalties.
+
+Disclaimers
+
+This is theoretical research code—not production-ready. Use at your own risk.
+No warranties. Test rigorously; falsify if possible.
+Questions? Open an issue or Email: xallasinea2@gmail.com

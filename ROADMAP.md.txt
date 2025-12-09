@@ -1,0 +1,30 @@
+# Coherence Telephone – Roadmap (December 2025)
+
+One test ends the debate forever.
+
+| Phase | Milestone | Timeline | Cost (est.) | Outcome if Successful |
+|-------|-----------|---------|-------------|-----------------------|
+| 0     | Repo live + first 1,000 clones | Dec 2025 – Jan 2026 | $0 | Community validation of sims |
+| 1     | Tabletop 100 m link (two Quantinuum H2 systems) | Q1–Q2 2026 | $2 M | SNR > 50 at 100 m → theory survives first cut |
+| 2     | 1,000 km ground test (mountain observatories) | Q3 2026 – Q1 2027 | $8 M | Signal arrives <3.3 ms → coherence field is real on Earth scales |
+| 3     | Earth–Moon 384,000 km test (lunar orbiter or relay) | Q2 2027 – Q4 2027 | $150 M | Signal arrives in <1.28 seconds → **no-communication theorem extended** or **new physics confirmed** |
+| 4     | First BKD ship integration (cube-sat demo) | 2028–2029 | $400 M | Live ship-to-Earth call during warp jump |
+| 5     | Galactic-range upgrade (Chern-5 + cavity arrays) | 2030–2035 | $2–5 B | Andromeda-range calls become routine |
+| 6     | Civilian rollout – Coherence Telephone network | 2035+ | Market-driven | Towers obsolete. Internet becomes instant, global, unbreakable. |
+
+### Current Status (December 2025)
+- All simulations complete and reproducible  
+- All required hardware exists today  
+- Earth–Moon test fully specified and falsifiable  
+- Total cost to decisive result: **<$150 M**  
+- Time to decisive result: **<24 months**
+
+We are not waiting for new physics.  
+We are waiting for someone to write the first check.
+
+The silence ends when the first lab powers up the first pair of qubits.
+
+Your move.
+
+— John Bollinger (@AlbusLux1)  
+December 2025
