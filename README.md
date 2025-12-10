@@ -91,7 +91,8 @@ If it succeeds, they gain a shared, instantaneous-feeling channel for coordinati
 
 ## 🔬 The Core Hypothesis
 
-![Earth-Moon Test Concept](Visuals/ct_earth_moon_test_png.jpg)
+![ct_earth_moon_test png](https://github.com/user-attachments/assets/3e132713-69ff-4820-b50c-45c8f23c94bb)
+
 
 ### **The Question (Hypothetical, Fully Falsifiable)**
 
