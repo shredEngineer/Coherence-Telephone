@@ -161,7 +161,8 @@ All theory, all metaphors, all philosophy collapse to **one experiment:**
 
 ### **Decision Rule**
 
-![Earth-Moon Test Simulation](Visuals/ct_earth_moon_test_1_png.png)
+<img width="1600" height="1371" alt="ct_earth_moon_test#1 png" src="https://github.com/user-attachments/assets/a8bc6646-0931-4e36-bab5-f5266c1779b9" />
+
 
 **The simulation above shows what we predict:** Signal arrival at **0.060s** (60 milliseconds) vs light speed at **1.28s**
 
@@ -176,7 +177,8 @@ All theory, all metaphors, all philosophy collapse to **one experiment:**
 
 ### **Simulation Results**
 
-![Critical Coupling Analysis](Visuals/critical_coupling_sweep_v1_3_png.png)
+<img width="1600" height="1200" alt="critical_coupling_sweep_v1 3 png" src="https://github.com/user-attachments/assets/8defd7b3-7304-47d7-953e-e5aa9f6f6f99" />
+
 
 The 4-panel diagnostic above shows:
 - **Top left:** Signal arrives at t ≈ 0 (FTL region confirmed)
