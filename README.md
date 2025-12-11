@@ -48,7 +48,13 @@ If the answer is **yes**, we are standing at the edge of the biggest communicati
 ****TECHNICAL WHITEPAPER****
        [Coherence_Telephone_Technical_Whitepaper.pdf](https://github.com/user-attachments/files/24089787/Coherence_Telephone_Technical_Whitepaper.pdf)
 ****UPDATED MATH****
-https://github.com/Albuslux1/Coherence-Telephone/blob/main/Math/coherence_field_derivation.txt.txt
+<details>
+<summary><b>📐 Click to expand: Complete Mathematical Derivation</b></summary>
+
+[10-15 key equations with beautiful LaTeX rendering]
+[Link to full derivation]
+
+</details>
 
 
 ## 🌌 Why This Matters (If It's Real)
