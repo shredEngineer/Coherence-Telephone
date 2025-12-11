@@ -124,7 +124,6 @@ $$C_{\mathcal{C}_0} = F[A^\mu_{\mathcal{C}_0}]$$
 Scan $\alpha, \beta, \tau$ to find optimal detection parameters.
 
 ### 5. **Share with Wilhelm**
-Get feedback on:
 - Which functional form is most physically motivated?
 - Are there known gauge-invariant functionals from QED?
 - How should topology couple to EM field?
@@ -180,7 +179,7 @@ Instead of entropy → coherence, we can go EM field → coherence directly.
 
 **This simulation proves the concept works computationally.**
 
-**Next: Get Wilhelm's feedback and refine the approach.**
+
 
 ---
 
