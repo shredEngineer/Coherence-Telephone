@@ -1,0 +1,10 @@
+Ultra-minimalist scientific diagram titled “Coherence Telephone – How It Works”.
+Black background, white and electric-cyan lines.
+Two circles: Earth (left) and Moon (right), 384,000 km apart.
+Between them: a glowing cyan topological braid (symbolizing protected coherence field).
+Earth side: logical qubit + sapphire cavity + entropy modulator (simple icons).
+Moon side: identical qubit + SNSPD detector.
+Arrow from Earth modulator → braid → Moon detector labeled “<1.28 s”.
+Large text at bottom: “If the signal arrives early, physics changes forever.”
+Small text at top: “Coherence Telephone – Earth–Moon Test – 2027”
+Style: high-contrast, no clutter, looks like it belongs on an arXiv front page.

@@ -1,0 +1,216 @@
+def run_enhanced_simulation():
+    # --- ADD THESE LINES TO FIX SCOPE ERRORS ---
+    mod_amplitude = 0.5   # Modulation depth (Strength of "1" vs "0")
+    gamma = 2.0           # Decoherence rate (How fast the signal fades)
+    J_coupling = 5.0      # Coupling strength (How hard we drive the link)
+    # -------------------------------------------
+J_coupling = 10.0
+gamma      = 0.2
+
+J_coupling     = 15.0      # crank the drive harder
+gamma          = 0.1       # even longer coherence time (realistic for Chern-4+)
+mod_amplitude  = 0.8       # stronger entropy kicks (clearer 1 vs 0)
+    # ... rest of my code ...
+
+"""
+Coherence Telephone – Enhanced Earth–Moon Test Simulation
+v1.1 – Includes noise, bit encoding, and error analysis
+"""
+
+import numpy as np
+from scipy.integrate import solve_ivp
+from scipy.signal import butter, filtfilt
+import matplotlib.pyplot as plt
+
+# ———————— ENHANCED PARAMETERS ————————
+class Detector:
+    """Models a real superconducting nanowire single-photon detector (SNSPD)"""
+    def __init__(self):
+        self.dark_count_rate = 100  # counts/second
+        self.efficiency = 0.95      # quantum efficiency
+        self.jitter = 50e-12        # 50 ps timing jitter
+        self.dead_time = 50e-9      # 50 ns dead time
+        
+    def add_noise(self, signal, t, dt):
+        # Poisson statistics for photon counting
+        expected_counts = signal * self.efficiency * dt
+        actual_counts = np.random.poisson(expected_counts)
+        signal_with_noise = actual_counts / (self.efficiency * dt)
+        
+        # Add dark counts
+        dark_counts = np.random.poisson(self.dark_count_rate * dt, len(signal))
+        signal_with_noise += dark_counts / (self.efficiency * dt)
+        
+        # Add timing jitter
+        if self.jitter > 0:
+            jitter_shift = np.random.randn(len(signal)) * self.jitter
+            t_jittered = t + jitter_shift
+            signal_with_noise = np.interp(t, t_jittered, signal_with_noise)
+            
+        return signal_with_noise
+
+def run_enhanced_simulation():
+    # Parameters (same as before)
+    Chern = 3.0
+    Gamma_topology = 1 + (Chern / 3)**2
+    distance_m = 384_000_000
+    distance_ly = distance_m / (3.08568e16)
+    
+    lambda_base = 1e6 * 3.08568e16
+    lambda_eff = lambda_base * Gamma_topology**2
+    Phi_0 = 1.0
+    Phi_coupling = Phi_0 * Gamma_topology * np.exp(-distance_ly / (lambda_eff / 3.08568e16))
+    
+    # Time parameters
+    bit_rate = 0.5  # 0.5 Hz = 2 seconds per bit
+    t_span = (0, 30)  # 30 seconds for multiple bits
+    dt = 0.001  # 1 ms resolution
+    
+    # Encode actual message
+    message_bits = [1, 0, 1, 1, 0, 1, 0, 0, 1, 1]  # "Hello" in simple code
+    
+    def dynamics_with_message(t, y):
+        C_earth, C_moon = y
+        
+        # Encode message in Earth's coherence
+        bit_index = int(t * bit_rate) % len(message_bits)
+        modulation = mod_amplitude * (2 * message_bits[bit_index] - 1)
+        
+        # Dynamics
+        dC_earth = -gamma * (C_earth - 1.0) + modulation
+        dC_moon = -gamma * (C_moon - 1.0) + J_coupling * Phi_coupling * (C_earth - C_moon)
+        
+        return [dC_earth, dC_moon]
+    
+    # Run simulation
+    t_eval = np.arange(t_span[0], t_span[1], dt)
+    sol = solve_ivp(dynamics_with_message, t_span, [1.0, 1.0], 
+                    t_eval=t_eval, method='RK45', rtol=1e-8)
+    
+    # Add realistic detector noise
+    detector = Detector()
+    C_moon_noisy = detector.add_noise(sol.y[1], sol.t, dt)
+    
+    # Signal processing
+    def butter_lowpass_filter(data, cutoff, fs, order=5):
+        nyquist = 0.5 * fs
+        normal_cutoff = cutoff / nyquist
+        b, a = butter(order, normal_cutoff, btype='low', analog=False)
+        return filtfilt(b, a, data)
+    
+    # Filter to reduce noise
+    C_moon_filtered = butter_lowpass_filter(C_moon_noisy, cutoff=10, fs=1/dt)
+    
+    # Detect signal arrival using cross-correlation
+    def detect_signal_arrival(sent, received, t, light_delay):
+        # Cross-correlation to find time delay
+        correlation = np.correlate(received - np.mean(received), 
+                                  sent - np.mean(sent), mode='full')
+        lags = np.arange(-len(sent)+1, len(sent))
+        best_lag = lags[np.argmax(correlation)] * dt
+        
+        arrival_time = abs(best_lag)
+        
+        # Statistical significance test
+        pre_signal = received[t < light_delay]
+        post_signal = received[t >= light_delay]
+        
+        from scipy import stats
+        t_stat, p_value = stats.ttest_ind(pre_signal, post_signal, equal_var=False)
+        
+        return arrival_time, p_value
+    
+    light_delay = 1.28
+    arrival_time, p_value = detect_signal_arrival(sol.y[0], C_moon_filtered, sol.t, light_delay)
+    
+    # Decode message
+    def decode_message(signal, t, bit_rate):
+        bits = []
+        bit_duration = 1/bit_rate
+        num_bits = int(t[-1] // bit_duration)
+        
+        for i in range(num_bits):
+            mask = (t >= i*bit_duration + 0.3*bit_duration) & \
+                   (t < (i+1)*bit_duration - 0.3*bit_duration)
+            if np.sum(mask) > 0:
+                avg_val = np.mean(signal[mask])
+                bits.append(1 if avg_val > 0 else 0)
+        return bits[:len(message_bits)]  # Trim to original length
+    
+    received_bits = decode_message(C_moon_filtered, sol.t, bit_rate)
+    
+    # Calculate bit error rate
+    errors = sum(1 for s, r in zip(message_bits, received_bits) if s != r)
+    ber = errors / len(message_bits)
+    
+    return {
+        't': sol.t,
+        'C_earth': sol.y[0],
+        'C_moon_raw': sol.y[1],
+        'C_moon_noisy': C_moon_noisy,
+        'C_moon_filtered': C_moon_filtered,
+        'arrival_time': arrival_time,
+        'p_value': p_value,
+        'message_bits': message_bits,
+        'received_bits': received_bits,
+        'ber': ber
+    }
+
+# Run and plot
+results = run_enhanced_simulation()
+
+# Create comprehensive plot
+fig, axes = plt.subplots(3, 1, figsize=(14, 12))
+
+# Plot 1: Transmitted signal
+axes[0].plot(results['t'], results['C_earth'], 'cyan', linewidth=2)
+axes[0].set_ylabel('Earth Coherence', fontsize=12)
+axes[0].set_title('Transmitted Signal (Encoded Bits)', fontsize=14)
+axes[0].grid(alpha=0.3)
+
+# Plot 2: Received signal
+axes[1].plot(results['t'], results['C_moon_raw'], 'white', alpha=0.5, label='Ideal')
+axes[1].plot(results['t'], results['C_moon_noisy'], 'yellow', alpha=0.3, label='Noisy')
+axes[1].plot(results['t'], results['C_moon_filtered'], 'lime', linewidth=2, label='Filtered')
+axes[1].axvline(1.28, color='red', linestyle=':', label='Light speed')
+axes[1].axvline(results['arrival_time'], color='cyan', linestyle='--', 
+                label=f'Detected: {results["arrival_time"]:.3f}s')
+axes[1].set_ylabel('Moon Coherence', fontsize=12)
+axes[1].set_title('Received Signal at Moon Station', fontsize=14)
+axes[1].legend()
+axes[1].grid(alpha=0.3)
+
+# Plot 3: Bit decoding
+bit_duration = 2  # 0.5 Hz = 2 seconds per bit
+for i, bit in enumerate(results['message_bits']):
+    color = 'lime' if bit == 1 else 'red'
+    axes[2].axvspan(i*bit_duration, (i+1)*bit_duration, alpha=0.2, color=color)
+    
+# Plot decoded bits
+for i, (sent, received) in enumerate(zip(results['message_bits'], results['received_bits'])):
+    color = 'green' if sent == received else 'red'
+    axes[2].plot([i*bit_duration + bit_duration/2], [received], 'o', color=color, markersize=10)
+
+axes[2].set_xlabel('Time (seconds)', fontsize=12)
+axes[2].set_ylabel('Bit Value', fontsize=12)
+axes[2].set_title(f'Bit Decoding (BER: {results["ber"]:.2%})', fontsize=14)
+axes[2].set_ylim(-0.5, 1.5)
+axes[2].grid(alpha=0.3)
+
+# Main title
+fig.suptitle('Coherence Telephone: Enhanced Earth-Moon Test Simulation\n'
+             f'Signal arrival: {results["arrival_time"]:.3f}s (light: 1.280s) | '
+             f'p-value: {results["p_value"]:.2e}', 
+             fontsize=16, fontweight='bold')
+
+plt.tight_layout()
+plt.savefig('coherence_telephone_enhanced_test.png', dpi=200, facecolor='black')
+plt.show()
+
+print(f"Arrival time: {results['arrival_time']:.6f} seconds")
+print(f"Light delay:  1.280 seconds")
+print(f"Difference:   {results['arrival_time'] - 1.28:.6f} seconds")
+print(f"p-value:      {results['p_value']:.2e}")
+print(f"Bit Error Rate: {results['ber']:.2%}")
+print(f"Message sent:    {results['message_bits']}")
+print(f"Message received:{results['received_bits']}")

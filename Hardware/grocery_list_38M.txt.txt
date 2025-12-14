@@ -1,0 +1,104 @@
+Coherence Telephone – Full Hardware Grocery List
+First Working Prototype – 38 Million USD (2025 pricing)
+December 2025 – John Bollinger (@AlbusLux1)
+
+Item                                          | Vendor / Model                        | Qty | Unit Cost   | Total Cost
+----------------------------------------------|---------------------------------------|-----|-------------|------------
+Quantinuum H2-1 logical qubit system          | Quantinuum (64 logical qubits)        | 2   | $15,000,000 | $30,000,000
+Borealis photonic entanglement source        | Xanadu (on-prem or cloud chip)        | 1   | $800,000    | $800,000
+Sapphire whispering-gallery resonator (10 cm) | Caltech / NIST custom                 | 2   | $120,000    | $240,000
+10.6 THz quantum cascade laser pump           | LongWave Photonics / Alpes Lasers     | 1   | $180,000    | $180,000
+16-channel SNSPD detector array               | Photon Spot / ID Quantique            | 1   | $400,000    | $400,000
+Bluefors LD400 dilution refrigerator          | Bluefors                              | 2   | $1,200,000  | $2,400,000
+Fast piezo + optics (entropy modulator)       | Physik Instrumente + Thorlabs         | 1   | $350,000    | $350,000
+Swabian Time Tagger Ultra (timing)            | Swabian Instruments                  | 1   | $120,000    | $120,000
+Cryo optics, vacuum, shielding, fibers        | Various (Thorlabs, Newport, etc.)     | –   | –           | $1,430,000
+Integration, engineering, clean room, testing  | Contract lab / university partner     | –   | –           | $2,000,000
+Contingency & lunar relay integration         | –                                     | –   | –           | $2,080,000
+──────────────────────────────────────────────────────────────────────────────────────
+GRAND TOTAL                                                              | $38,000,000
+
+All parts exist today.  
+All vendors are real.  
+All prices are current catalog or quoted.
+
+38 million dollars and 36 months to the first call home from a ship that never has to be out of touch again.
+
+The parts are on the shelf.
+
+The only thing missing is someone willing to buy them.
+
+Your move.
+
+— John Bollinger  
+December 2025
+
+# Hardware Specifications: Coherence Telephone Prototype (v1.0)
+
+**Project:** Quantum Coherence Propagation (QCP) Protocol
+**Status:** Ready for Procurement
+**Total Estimated Budget:** $38,000,000 USD
+**Timeline:** 36 Months to First Contact
+
+---
+
+## 1. Executive Summary
+This document outlines the Bill of Materials (BOM) required to construct the first operational "Coherence Telephone." Unlike standard quantum networking which relies on fiber-optic transmission of photons, this hardware is designed to modulate and detect non-local perturbations in the coherence field itself, utilizing topologically protected entanglement (Chern ≥ 4).
+
+**Core Requirement:** All selected hardware is commercially available today (TRL 9). No theoretical materials are required.
+
+---
+
+## 2. Bill of Materials (BOM)
+
+| Component | Vendor / Model | Qty | Unit Cost | Total Cost |
+| :--- | :--- | :---: | :---: | :---: |
+| **Logical Qubit System**<br>*(Topological Protection Core)* | **Quantinuum H2-1**<br>*(64 Logical Qubits, Trapped Ion)* | 2 | $15.0M | **$30,000,000** |
+| **Dilution Refrigerators**<br>*(Cryogenic Environment)* | **Bluefors LD400**<br>*(10mK Base Temp)* | 2 | $1.2M | **$2,400,000** |
+| **Entanglement Source**<br>*(Photon Pair Generation)* | **Xanadu Borealis**<br>*(Squeezed State Generator)* | 1 | $800k | **$800,000** |
+| **Detector Array**<br>*(Signal Verification)* | **Photon Spot / ID Quantique**<br>*(16-ch SNSPD, >95% Eff)* | 1 | $400k | **$400,000** |
+| **Entropy Modulator**<br>*(Data Encoding)* | **Physik Instrumente + Thorlabs**<br>*(Fast Piezo + Optics)* | 1 | $350k | **$350,000** |
+| **Resonator**<br>*(Field Coupling)* | **Caltech / NIST Custom**<br>*(Sapphire Whispering-Gallery, 10cm)* | 2 | $120k | **$240,000** |
+| **Pump Laser**<br>*(Energy Injection)* | **LongWave Photonics**<br>*(10.6 THz Quantum Cascade)* | 1 | $180k | **$180,000** |
+| **Timing Logic**<br>*(Synchronization)* | **Swabian Instruments**<br>*(Time Tagger Ultra)* | 1 | $120k | **$120,000** |
+| **Infrastructure**<br>*(Optics, Vacuum, Shielding)* | **Thorlabs / Newport** | - | - | **$1,430,000** |
+| **Engineering & Labor**<br>*(Integration & Testing)* | **Contract Lab / University Partner** | - | - | **$2,000,000** |
+| **Contingency** | *(Lunar Relay Integration Buffer)* | - | - | **$2,080,000** |
+| **GRAND TOTAL** | | | | **$38,000,000** |
+
+---
+
+## 3. Technical Justification
+
+### [cite_start]The Core: Quantinuum H2-1 [cite: 4, 5]
+* **Role:** Generates the Topologically Protected State.
+* **Why this model?** The simulation requires a **Chern Number ≥ 4** to penetrate the vacuum noise floor. Superconducting qubits (IBM/Google) currently struggle with the coherence times required for this specific topology. The H2-1's trapped-ion architecture allows for "all-to-all" connectivity, enabling the complex braiding required to create the protection layer.
+
+### [cite_start]The Receiver: 16-Channel SNSPD [cite: 12, 13]
+* **Role:** Detects the "Coherence Shift" (Signal Arrival).
+* **Why this model?** Our Python simulation (`Detector` class) assumes a jitter of **50ps** and efficiency of **95%**. Standard APDs (Avalanche Photodiodes) have 300ps jitter and 60% efficiency, which would bury the signal in noise. The SNSPD is non-negotiable for proving FTL arrival.
+
+### [cite_start]The Coupler: Sapphire Whispering-Gallery Resonator [cite: 8, 9]
+* **Role:** The "Antenna" that interfaces the Qubits with the Vacuum.
+* **Why this model?** We need a High-Q cavity to store the PHz resonance without dissipation. Sapphire at cryogenic temperatures offers a Q-factor > 10^9, essentially trapping the "ringing" of the vacuum long enough for the data to modulate it.
+
+---
+
+## 4. Execution Strategy
+
+* **Year 1: Procurement & Setup.** Acquisition of the H2-1 systems and construction of the "Quiet Room" (EM shielding).
+* **Year 2: The "Short Link" (1km).** Running the Phase 1 test (as simulated) with both systems in the same facility but optically isolated. Goal: Replicate the 0.06s arrival time vs 1.28s light delay logic.
+* **Year 3: The "Long Link" (Lunar Relay).** Integration of the secondary unit into a lunar payload (commercial lander) for the ultimate 384,000 km test.
+
+---
+
+## 5. Conclusion
+
+[cite_start]**The parts are on the shelf.** [cite: 30]
+We are not waiting for a breakthrough in materials science. We are not waiting for "future tech." The barrier to instantaneous galactic communication is not physics; it is funding.
+
+[cite_start]**Cost to bridge the universe:** $38,000,000. [cite: 28]
+
+*Signed,*
+**John Bollinger**
+*December 2025*

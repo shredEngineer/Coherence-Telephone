@@ -1,0 +1,418 @@
+"""
+Coherence Telephone – Critical Coupling Phase Diagram
+v1.3 – Parameter Sweep for J_coupling Threshold
+December 2025 – John Bollinger (@AlbusLux1)
+
+Sweeps J_coupling from 0.1 to 15.0 to find:
+1. Where FTL emerges (arrival_time < 1.28s)
+2. Critical J value for reliable communication (BER < 1%)
+3. Phase transition sharpness
+4. Minimum viable parameters for Earth-Moon FTL
+"""
+
+import numpy as np
+from scipy.integrate import solve_ivp
+from scipy.signal import butter, filtfilt
+from scipy.stats import ttest_ind
+import matplotlib.pyplot as plt
+from tqdm import tqdm
+import warnings
+warnings.filterwarnings('ignore')
+
+# ============================= BASE PARAMETERS =============================
+def butter_lowpass(data, cutoff=10.0, fs=1000.0, order=5):
+    """Butterworth lowpass filter"""
+    nyquist = 0.5 * fs
+    normal_cutoff = cutoff / nyquist
+    b, a = butter(order, normal_cutoff, btype='low', analog=False)
+    return filtfilt(b, a, data)
+
+class RealisticSNSPD:
+    """Realistic superconducting nanowire detector model"""
+    def __init__(self, efficiency=0.93, dark_rate=120, jitter_ps=45):
+        self.efficiency = efficiency
+        self.dark_rate = dark_rate
+        self.jitter_ps = jitter_ps
+        
+    def add_noise(self, clean_signal, t, dt):
+        expected = clean_signal * self.efficiency * dt
+        noisy = np.random.poisson(expected) / (self.efficiency * dt)
+        dark = np.random.poisson(self.dark_rate * dt, len(t))
+        noisy += dark / (self.efficiency * dt)
+        
+        if self.jitter_ps > 0:
+            jitter = np.random.normal(0, self.jitter_ps * 1e-12, len(t))
+            t_jittered = t + jitter
+            noisy = np.interp(t, t_jittered, noisy, left=noisy[0], right=noisy[-1])
+        
+        return noisy
+
+# ============================= SINGLE SIMULATION FUNCTION =============================
+def run_simulation(J_coupling, gamma=0.1, mod_amplitude=0.8, 
+                   Chern=3.0, message_length=10, verbose=False):
+    """
+    Run one Earth-Moon coherence telephone simulation
+    Returns: arrival_time, p_value, ber, signal_strength
+    """
+    # Derived parameters
+    Gamma_topology = 1 + (Chern / 3)**2
+    distance_m = 384_000_000
+    distance_ly = distance_m / 9.46073e15
+    
+    lambda_base = 1e6 * 9.46073e15  # 1 million light-years
+    lambda_eff = lambda_base * Gamma_topology**2
+    
+    Phi_0 = 1.0
+    Phi_coupling = Phi_0 * Gamma_topology * np.exp(-distance_ly / (lambda_eff / 9.46073e15))
+    
+    # Simulation parameters
+    bit_rate = 0.5  # 0.5 Hz = 2 seconds per bit
+    light_delay = 1.28  # seconds
+    
+    # Generate random message
+    np.random.seed(int(J_coupling * 1000))  # Deterministic for comparison
+    message_bits = np.random.choice([0, 1], size=message_length)
+    
+    # Time grid
+    t_end = len(message_bits) / bit_rate + 5
+    dt = 0.001
+    t_eval = np.arange(0, t_end, dt)
+    
+    # Dynamics function
+    def coherence_dynamics(t, y):
+        C_earth, C_moon = y
+        bit_index = min(int(t * bit_rate), len(message_bits) - 1)
+        modulation = mod_amplitude * (2 * message_bits[bit_index] - 1)
+        dC_earth = -gamma * (C_earth - 1.0) + modulation
+        dC_moon = -gamma * (C_moon - 1.0) + J_coupling * Phi_coupling * (C_earth - C_moon)
+        return [dC_earth, dC_moon]
+    
+    # Run simulation
+    sol = solve_ivp(coherence_dynamics, (0, t_end), [1.0, 1.0],
+                    t_eval=t_eval, method='RK45', rtol=1e-8, atol=1e-10)
+    
+    t = sol.t
+    C_earth = sol.y[0]
+    C_moon_clean = sol.y[1]
+    
+    # Add noise and filter
+    detector = RealisticSNSPD()
+    C_moon_noisy = detector.add_noise(C_moon_clean, t, dt)
+    C_moon_filtered = butter_lowpass(C_moon_noisy, cutoff=8.0, fs=1/dt)
+    
+    # Cross-correlation detection
+    correlation = np.correlate(C_moon_filtered - C_moon_filtered.mean(),
+                              C_earth - C_earth.mean(), mode='full')
+    lags = np.arange(-len(t)+1, len(t))
+    best_lag_idx = np.argmax(correlation)
+    arrival_time = abs(lags[best_lag_idx] * dt)
+    
+    # Statistical significance
+    pre_signal = C_moon_filtered[t < light_delay]
+    post_signal = C_moon_filtered[t >= light_delay]
+    if len(post_signal) > 10 and len(pre_signal) > 10:
+        _, p_value = ttest_ind(post_signal[:min(100, len(post_signal))], 
+                              pre_signal[:min(100, len(pre_signal))], 
+                              equal_var=False)
+    else:
+        p_value = 1.0
+    
+    # Bit decoding and BER
+    decoded_bits = []
+    for i in range(len(message_bits)):
+        start_idx = int(i / bit_rate / dt)
+        end_idx = int((i + 1) / bit_rate / dt)
+        if end_idx > len(C_moon_filtered):
+            end_idx = len(C_moon_filtered)
+        segment = C_moon_filtered[start_idx:end_idx]
+        if len(segment) > 0:
+            decoded_bits.append(1 if np.mean(segment) > 0 else 0)
+        else:
+            decoded_bits.append(0)
+    
+    # Calculate BER (only if we have all bits)
+    if len(decoded_bits) == len(message_bits):
+        errors = sum(a != b for a, b in zip(message_bits, decoded_bits))
+        ber = errors / len(message_bits)
+    else:
+        ber = 0.5  # Worst case
+    
+    # Signal strength metric
+    signal_strength = np.std(C_moon_filtered[t >= light_delay]) / np.std(C_moon_filtered[t < light_delay])
+    
+    if verbose and J_coupling == 8.0:
+        print(f"J={J_coupling:.1f}: arrival={arrival_time:.3f}s, p={p_value:.2e}, BER={ber:.3f}, signal={signal_strength:.3f}")
+    
+    return arrival_time, p_value, ber, signal_strength
+
+# ============================= PARAMETER SWEEP =============================
+def run_parameter_sweep():
+    """Sweep J_coupling to find critical values"""
+    
+    print("="*70)
+    print("COHERENCE TELEPHONE – CRITICAL COUPLING SWEEP")
+    print("="*70)
+    
+    # Sweep J_coupling from 0.1 to 15.0
+    J_values = np.linspace(0.1, 15.0, 100)
+    arrival_times = []
+    p_values = []
+    bers = []
+    signal_strengths = []
+    
+    print(f"\nSweeping J_coupling from {J_values[0]:.1f} to {J_values[-1]:.1f}")
+    print("Progress:")
+    
+    # Run simulations with progress bar
+    for J in tqdm(J_values, desc="J_coupling sweep", ncols=100):
+        arrival, pval, ber, signal_str = run_simulation(J_coupling=J, verbose=False)
+        arrival_times.append(arrival)
+        p_values.append(pval)
+        bers.append(ber)
+        signal_strengths.append(signal_str)
+    
+    # Convert to arrays
+    arrival_times = np.array(arrival_times)
+    p_values = np.array(p_values)
+    bers = np.array(bers)
+    signal_strengths = np.array(signal_strengths)
+    
+    # Find critical points
+    light_delay = 1.28
+    
+    # 1. First FTL detection (any arrival < 1.28s)
+    ftl_mask = arrival_times < light_delay - 0.01
+    if np.any(ftl_mask):
+        first_ftl_idx = np.where(ftl_mask)[0][0]
+        J_first_ftl = J_values[first_ftl_idx]
+    else:
+        J_first_ftl = None
+    
+    # 2. Reliable FTL (arrival < 1.28s AND p < 0.001)
+    reliable_mask = (arrival_times < light_delay - 0.05) & (p_values < 0.001)
+    if np.any(reliable_mask):
+        first_reliable_idx = np.where(reliable_mask)[0][0]
+        J_reliable = J_values[first_reliable_idx]
+    else:
+        J_reliable = None
+    
+    # 3. Error-free FTL (BER < 0.01)
+    errorfree_mask = (arrival_times < light_delay - 0.05) & (bers < 0.01)
+    if np.any(errorfree_mask):
+        first_errorfree_idx = np.where(errorfree_mask)[0][0]
+        J_errorfree = J_values[first_errorfree_idx]
+    else:
+        J_errorfree = None
+    
+    # 4. Strong signal (signal_strength > 2.0)
+    strong_mask = (arrival_times < light_delay - 0.05) & (signal_strengths > 2.0)
+    if np.any(strong_mask):
+        first_strong_idx = np.where(strong_mask)[0][0]
+        J_strong = J_values[first_strong_idx]
+    else:
+        J_strong = None
+    
+    return {
+        'J_values': J_values,
+        'arrival_times': arrival_times,
+        'p_values': p_values,
+        'bers': bers,
+        'signal_strengths': signal_strengths,
+        'J_first_ftl': J_first_ftl,
+        'J_reliable': J_reliable,
+        'J_errorfree': J_errorfree,
+        'J_strong': J_strong
+    }
+
+# ============================= VISUALIZATION =============================
+def plot_phase_diagram(results):
+    """Create comprehensive phase diagram plots"""
+    
+    J_values = results['J_values']
+    arrival_times = results['arrival_times']
+    p_values = results['p_values']
+    bers = results['bers']
+    signal_strengths = results['signal_strengths']
+    
+    fig, axes = plt.subplots(2, 2, figsize=(16, 12), facecolor='black')
+    fig.suptitle('Coherence Telephone – Phase Diagram of FTL Communication', 
+                 color='white', fontsize=18, fontweight='bold')
+    
+    # Plot 1: Arrival Time vs J_coupling
+    ax = axes[0, 0]
+    ax.plot(J_values, arrival_times, 'cyan', linewidth=3, label='Signal Arrival Time')
+    ax.axhline(1.28, color='red', linestyle='--', linewidth=2, label='Light Speed (1.28s)')
+    ax.axhline(0, color='white', linestyle=':', alpha=0.5)
+    
+    # Highlight FTL region
+    ftl_region = arrival_times < 1.28
+    if np.any(ftl_region):
+        ax.fill_between(J_values[ftl_region], 0, arrival_times[ftl_region], 
+                       color='lime', alpha=0.3, label='FTL Region')
+    
+    # Mark critical J values
+    colors = ['yellow', 'orange', 'magenta', 'white']
+    labels = ['First FTL', 'Reliable (p<0.001)', 'Error-free (BER<1%)', 'Strong (S/N>2)']
+    J_crits = [results['J_first_ftl'], results['J_reliable'], 
+               results['J_errorfree'], results['J_strong']]
+    
+    for J, color, label in zip(J_crits, colors, labels):
+        if J is not None:
+            ax.axvline(J, color=color, linestyle=':', alpha=0.7, linewidth=2)
+            ax.text(J, 1.4, f'{J:.2f}', color=color, fontweight='bold',
+                   ha='center', va='bottom')
+    
+    ax.set_xlabel('Coupling Strength (J)', color='white', fontsize=12)
+    ax.set_ylabel('Arrival Time (seconds)', color='white', fontsize=12)
+    ax.set_title('Signal Propagation Time vs Coupling Strength', color='white', fontsize=14)
+    ax.grid(alpha=0.2, color='white')
+    ax.legend(loc='upper right')
+    ax.set_facecolor('black')
+    
+    # Plot 2: Statistical Significance (-log10 p-value)
+    ax = axes[0, 1]
+    log_p = -np.log10(np.clip(p_values, 1e-15, 1))
+    ax.plot(J_values, log_p, 'yellow', linewidth=2)
+    ax.axhline(3, color='orange', linestyle='--', alpha=0.7, label='p=0.001 (strong evidence)')
+    ax.axhline(6, color='red', linestyle='--', alpha=0.7, label='p=1e-6 (very strong)')
+    
+    if results['J_reliable'] is not None:
+        ax.axvline(results['J_reliable'], color='orange', linestyle=':', alpha=0.5)
+    
+    ax.set_xlabel('Coupling Strength (J)', color='white', fontsize=12)
+    ax.set_ylabel('-log10(p-value)', color='white', fontsize=12)
+    ax.set_title('Statistical Significance vs Coupling', color='white', fontsize=14)
+    ax.grid(alpha=0.2, color='white')
+    ax.legend()
+    ax.set_facecolor('black')
+    
+    # Plot 3: Bit Error Rate
+    ax = axes[1, 0]
+    ax.plot(J_values, bers, 'magenta', linewidth=2)
+    ax.axhline(0.01, color='orange', linestyle='--', alpha=0.7, label='BER=1% (practical)')
+    ax.axhline(0.001, color='green', linestyle='--', alpha=0.7, label='BER=0.1% (excellent)')
+    
+    if results['J_errorfree'] is not None:
+        ax.axvline(results['J_errorfree'], color='magenta', linestyle=':', alpha=0.5)
+    
+    ax.set_xlabel('Coupling Strength (J)', color='white', fontsize=12)
+    ax.set_ylabel('Bit Error Rate', color='white', fontsize=12)
+    ax.set_title('Communication Quality vs Coupling', color='white', fontsize=14)
+    ax.grid(alpha=0.2, color='white')
+    ax.legend()
+    ax.set_facecolor('black')
+    ax.set_yscale('log')
+    
+    # Plot 4: Signal-to-Noise Ratio
+    ax = axes[1, 1]
+    ax.plot(J_values, signal_strengths, 'lime', linewidth=2)
+    ax.axhline(1.0, color='gray', linestyle='--', alpha=0.5, label='Signal = Noise')
+    ax.axhline(2.0, color='cyan', linestyle='--', alpha=0.7, label='S/N=2 (detectable)')
+    ax.axhline(5.0, color='yellow', linestyle='--', alpha=0.7, label='S/N=5 (clear)')
+    
+    if results['J_strong'] is not None:
+        ax.axvline(results['J_strong'], color='lime', linestyle=':', alpha=0.5)
+    
+    ax.set_xlabel('Coupling Strength (J)', color='white', fontsize=12)
+    ax.set_ylabel('Signal-to-Noise Ratio', color='white', fontsize=12)
+    ax.set_title('Signal Quality vs Coupling', color='white', fontsize=14)
+    ax.grid(alpha=0.2, color='white')
+    ax.legend()
+    ax.set_facecolor('black')
+    
+    # Style all axes
+    for ax_row in axes:
+        for ax in ax_row:
+            for spine in ax.spines.values():
+                spine.set_color('white')
+            ax.tick_params(colors='white')
+            ax.xaxis.label.set_color('white')
+            ax.yaxis.label.set_color('white')
+            ax.title.set_color('white')
+    
+    plt.tight_layout()
+    
+    # Add summary text
+    summary_text = []
+    if results['J_first_ftl'] is not None:
+        summary_text.append(f"First FTL signal: J ≥ {results['J_first_ftl']:.2f}")
+    if results['J_reliable'] is not None:
+        summary_text.append(f"Reliable detection: J ≥ {results['J_reliable']:.2f}")
+    if results['J_errorfree'] is not None:
+        summary_text.append(f"Error-free comms: J ≥ {results['J_errorfree']:.2f}")
+    if results['J_strong'] is not None:
+        summary_text.append(f"Strong signal: J ≥ {results['J_strong']:.2f}")
+    
+    if summary_text:
+        fig.text(0.5, 0.01, " | ".join(summary_text), 
+                ha='center', color='cyan', fontsize=12, fontweight='bold')
+    
+    return fig
+
+# ============================= MAIN EXECUTION =============================
+if __name__ == "__main__":
+    print("Starting parameter sweep...")
+    results = run_parameter_sweep()
+    
+    print("\n" + "="*70)
+    print("CRITICAL COUPLING ANALYSIS")
+    print("="*70)
+    
+    if results['J_first_ftl'] is not None:
+        print(f"✓ First FTL signal emerges at J = {results['J_first_ftl']:.2f}")
+        print(f"  Arrival time: {results['arrival_times'][np.where(results['J_values'] >= results['J_first_ftl'])[0][0]]:.3f}s")
+    else:
+        print("✗ No FTL signal detected in sweep range")
+    
+    if results['J_reliable'] is not None:
+        print(f"✓ Reliable detection (p<0.001) at J = {results['J_reliable']:.2f}")
+    else:
+        print("✗ No statistically reliable FTL detected")
+    
+    if results['J_errorfree'] is not None:
+        print(f"✓ Error-free communication (BER<1%) at J = {results['J_errorfree']:.2f}")
+    else:
+        print("✗ No error-free communication achieved")
+    
+    if results['J_strong'] is not None:
+        print(f"✓ Strong signal (S/N>2) at J = {results['J_strong']:.2f}")
+    else:
+        print("✗ No strong signal region found")
+    
+    # Generate phase diagram
+    print("\nGenerating phase diagram...")
+    fig = plot_phase_diagram(results)
+    
+    # Save results
+    save_name = "coherence_telephone_phase_diagram.png"
+    fig.savefig(save_name, dpi=300, facecolor='black', bbox_inches='tight')
+    print(f"\n✓ Phase diagram saved as: {save_name}")
+    
+    # Save numerical results
+    np.savez("parameter_sweep_results.npz",
+             J_values=results['J_values'],
+             arrival_times=results['arrival_times'],
+             p_values=results['p_values'],
+             bers=results['bers'],
+             signal_strengths=results['signal_strengths'])
+    print("✓ Numerical results saved as: parameter_sweep_results.npz")
+    
+    # Show interactive plot
+    plt.show()
+    
+    # Final recommendations
+    print("\n" + "="*70)
+    print("RECOMMENDATIONS FOR EXPERIMENTAL DESIGN")
+    print("="*70)
+    
+    if results['J_reliable'] is not None:
+        print(f"1. Target J_coupling ≥ {max(8.0, results['J_reliable']):.2f} for robust FTL")
+        print(f"2. Minimum acceptable J: {results['J_first_ftl']:.2f} (marginal FTL)")
+    else:
+        print("1. Current parameters insufficient for FTL")
+        print("2. Need to explore higher J_coupling or improve gamma/modulation")
+    
+    print("3. Focus engineering on achieving critical coupling first")
+    print("4. Validate with Earth-based long-baseline test before lunar deployment")
+    
+    print("\n" + "="*70)

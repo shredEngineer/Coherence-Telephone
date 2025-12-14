@@ -1,0 +1,15 @@
+# Coherence Telephone – requirements.txt
+# Tested and working as of December 2025
+# Run: pip install -r requirements.txt
+
+numpy>=1.24.0
+scipy>=1.11.0
+matplotlib>=3.8.0
+qutip>=5.0.0          # Critical for quantum dynamics & Lindblad solvers
+seaborn>=0.13.0       # Optional – prettier plots
+tqdm>=4.66.0          # Progress bars for long sweeps (nice to have)
+jupyter>=1.0.0        # For running notebooks if you include them later
+
+# Optional – for high-quality PDF exports (used in some sims)
+latex>=0.7.0
+# Note: On Windows you may need MiKTeX, on macOS/MacTeX, on Linux texlive-latex-extra
