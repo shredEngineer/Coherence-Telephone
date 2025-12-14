@@ -87,7 +87,7 @@ Distance: 384,000 km → light delay = 1.28 s
 
 If the signal arrives in **<1.28 seconds**, physics changes forever.
 
-[Full protocol → Hardware/earth_moon_test_protocol.txt](Hardware/earth_moon_test_protocol.txt)
+[Full protocol → Hardware/earth_moon_test_protocol.md](Hardware/earth_moon_test_protocol.md)
 
 ---
 
