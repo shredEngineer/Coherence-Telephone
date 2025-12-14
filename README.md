@@ -217,42 +217,7 @@ I am asking you to help me break the idea properly.
 
 ---
 
-## Repository Structure
 
-```
-Coherence-Telephone/
-├── README.md
-├── License.txt
-├── ROADMAP.md
-│
-├── Theory/
-│   ├── AXION_ELECTRODYNAMICS_WHITEPAPER.md
-│   ├── Advanced_Foundations.md
-│   ├── FUNCTIONAL_FORM.md
-│   ├── EQUATIONS_OF_MOTION.md
-│   ├── COUPLING_CONSTANT.md
-│   └── PREDICTIONS_SIGNAL_STRENGTH.md
-│
-├── Philosophy/
-│   ├── THE_COHERENCE_FIELD_AS_QUANTUM_SUBSTRATE.md
-│   └── PRINCIPLE_TEMPORAL_INTEGRITY.md
-│
-├── Protocol/
-│   └── PROTOCOL_Phase1_Tabletop.md
-│
-├── Simulations/
-│   ├── coupled_system_simulation.py
-│   ├── physical_coupling_sim.py
-│   └── signal_predictions_viz.py
-│
-├── Visuals/
-│   └── [diagrams and plots]
-│
-└── Hardware/
-    └── [component specifications]
-```
-
----
 
 ## Position in the Bollinger Coherence Architecture
 
