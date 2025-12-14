@@ -61,7 +61,8 @@ Gives wave equations and propagating modes.
 
 ## System Architecture
 
-![Coherence Telephone Concept](Visuals/ct_concept_diagram.png)
+![Coherence Telephone Concept]<img width="3144" height="1979" alt="Technical_System_Architecture_EB" src="https://github.com/user-attachments/assets/49057939-be35-46a5-a7de-7950442171d7" />
+
 
 Earth modulates E·B in a high-Q cavity → perturbs shared coherence field → Moon detects instantaneous change in local coherence.
 
