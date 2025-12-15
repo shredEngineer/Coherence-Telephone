@@ -59,11 +59,11 @@ Understanding the "Why" and the nature of the coherence field.
 <br>
 The blueprints, grocery lists, and testing protocols required to build the device.
 
-* **[📄 View: Grocery List ($38M Prototype)](hardware/grocery_list_38M.txt)**
+* **[📄 View: Grocery List ($38M Prototype)](Hardware/grocery_list_38M.txt)**
     * *Complete Bill of Materials.*
-* **[📄 Read: Earth-Moon Test Protocol](hardware/earth_moon_test_protocol.txt)**
+* **[📄 Read: Earth-Moon Test Protocol](Hardware/earth_moon_test_protocol.txt)**
     * *Step-by-step guide for the critical latency test.*
-* **[📄 Read: Phase 1 Tabletop Protocol](hardware/PROTOCOL_Phase1_Tabletop.md)**
+* **[📄 Read: Phase 1 Tabletop Protocol](Hardware/PROTOCOL_Phase1_Tabletop.md)**
     * *Instructions for the initial lab-bench prototype.*
 * **[🖼️ View: System Architecture Diagram](assets/Technical_System_Architecture_EB.png)**
 * **[🖼️ View: Concept Diagram](assets/ct_concept_diagram.png)**
@@ -74,12 +74,12 @@ The blueprints, grocery lists, and testing protocols required to build the devic
 <br>
 Python simulations to validate the theory and test signal integrity.
 
-* **[📄 Read: Simulation Readme](simulations/SIMULATION_README.md)**
+* **[📄 Read: Simulation Readme](Simulations/SIMULATION_README.md)**
     * *Guide to running the simulations.*
-* **[🐍 Run: Earth-Moon Enhanced Final](simulations/earth_moon_enhanced_final.py)**
+* **[🐍 Run: Earth-Moon Enhanced Final](Simulations/earth_moon_enhanced_final.py)**
     * *The latest simulation logic for the Earth-Moon test.*
-* **[🐍 Run: Potential Coherence Sim v2.1](simulations/em_potential_coherence_simulation_v2_1.py)**
-* **[📄 Read: Simulation Results Summary](simulations/EM_Simulation_Results_Summary.md)**
+* **[🐍 Run: Potential Coherence Sim v2.1](Simulations/em_potential_coherence_simulation_v2_1.py)**
+* **[📄 Read: Simulation Results Summary](Simulations/EM_Simulation_Results_Summary.md)**
 </details>
 
 <details>
@@ -89,7 +89,7 @@ Where we are going and how we get there.
 
 * **[📄 Read: Project Roadmap](ROADMAP.md)**
 * **[🖼️ View: Timeline Roadmap](assets/timeline_roadmap.png)**
-* **[📄 Read: Predictions on Signal Strength](simulations/PREDICTIONS_SIGNAL_STRENGTH.md)**
+* **[📄 Read: Predictions on Signal Strength](Simulations/PREDICTIONS_SIGNAL_STRENGTH.md)**
 </details>
 
 ---
@@ -103,7 +103,7 @@ To run the primary simulation:
 git clone [https://github.com/Albuslux1/Coherence-Telephone.git](https://github.com/Albuslux1/Coherence-Telephone.git)
 
 # Navigate to the simulation folder
-cd Coherence-Telephone/simulations
+cd Coherence-Telephone/Simulations
 
 # Install dependencies
 pip install -r requirements.txt
