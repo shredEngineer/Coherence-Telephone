@@ -1,0 +1,176 @@
+"""
+Coherence Telephone v2.2 – Adaptive Threshold Detection
+Real-world detection with noise-adaptive thresholds.
+"""
+
+import numpy as np
+from scipy.integrate import solve_ivp
+import matplotlib.pyplot as plt
+
+def adaptive_threshold(signal, window_size=200, n_sigma=4.5):
+    """Strategy 1: Noise-floor tracking threshold."""
+    threshold = np.zeros_like(signal)
+    half_window = window_size // 2
+    padded = np.pad(signal, (half_window, half_window), mode='edge')
+    
+    for i in range(len(signal)):
+        window = padded[i:i + window_size]
+        threshold[i] = np.mean(window) + n_sigma * np.std(window)
+    return threshold
+
+def run_simulation_with_adaptive(Chern_sender=3.0, Chern_receiver=3.0,
+                                 drive_amplitude=1.0, noise_level=0.1,
+                                 bit_duration=2.0):
+    
+    message_bits = [1, 0, 1, 1, 0, 1, 0, 0, 1, 1]
+    t_end = len(message_bits) * bit_duration
+    
+    # ====================== SIMULATE PHYSICS ======================
+    theta_sender = 2 * np.pi * Chern_sender
+    theta_receiver = 2 * np.pi * Chern_receiver
+    
+    match_factor = 1.0 if Chern_sender == Chern_receiver else 0.0
+    alpha = 1/137
+    total_coupling = (alpha / (2 * np.pi)) * 0.25 * match_factor  # g=0.5 each
+    
+    def system_dynamics(t, y):
+        EB_applied, Phi_B = y
+        bit_index = int(t / bit_duration) % len(message_bits)
+        drive = drive_amplitude if message_bits[bit_index] else -drive_amplitude
+        
+        dEB = 0
+        field_drive = total_coupling * drive
+        dPhi = -0.2 * Phi_B + field_drive - theta_receiver**2 * Phi_B
+        return [dEB, dPhi]
+    
+    t_eval = np.linspace(0, t_end, int(t_end * 500))  # 500 Hz sampling
+    sol = solve_ivp(system_dynamics, [0, t_end], [0.0, 0.0], 
+                    t_eval=t_eval, method='RK45')
+    
+    t = sol.t
+    Phi_B = sol.y[1]
+    
+    # ====================== ADD REALISTIC NOISE ======================
+    # 1. White measurement noise
+    measurement_noise = np.random.normal(0, noise_level, len(t))
+    # 2. Low-frequency drift (common in cryogenic systems)
+    drift = 0.1 * noise_level * np.sin(2 * np.pi * 0.01 * t)
+    # 3. Occasional spikes (cosmic rays, electrical glitches)
+    spikes = np.random.poisson(0.001, len(t)) * np.random.normal(0, 5*noise_level, len(t))
+    
+    noisy_signal = Phi_B + measurement_noise + drift + spikes
+    
+    # ====================== ADAPTIVE DETECTION ======================
+    threshold = adaptive_threshold(np.abs(noisy_signal), 
+                                   window_size=500, 
+                                   n_sigma=4.5)
+    
+    # Detect when signal crosses adaptive threshold
+    above_threshold = np.abs(noisy_signal) > threshold
+    detection_points = t[above_threshold]
+    
+    # Decode bits using adaptive regions
+    decoded_bits = []
+    detection_stats = []
+    
+    for i, bit in enumerate(message_bits):
+        start_t = i * bit_duration
+        end_t = (i + 1) * bit_duration
+        mask = (t >= start_t) & (t < end_t)
+        
+        if np.any(mask):
+            segment_signal = noisy_signal[mask]
+            segment_threshold = threshold[mask]
+            
+            # Time spent above threshold in this bit period
+            time_above = np.sum(np.abs(segment_signal) > segment_threshold) / 500  # 500 Hz sampling
+            
+            # Decode based on average signal polarity
+            avg_signal = np.mean(segment_signal)
+            decoded_bit = 1 if avg_signal > 0 else 0
+            
+            decoded_bits.append(decoded_bit)
+            detection_stats.append({
+                'bit': bit,
+                'time_above': time_above,
+                'avg_signal': avg_signal,
+                'max_snr': np.max(np.abs(segment_signal) / segment_threshold)
+            })
+    
+    ber = np.mean([a != b for a, b in zip(message_bits, decoded_bits)])
+    
+    # ====================== VISUALIZATION ======================
+    fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(14, 10), sharex=True)
+    
+    # Plot 1: Clean vs Noisy Signal
+    ax1.plot(t, Phi_B, 'cyan', alpha=0.7, label='Clean Signal', lw=1)
+    ax1.plot(t, noisy_signal, 'white', alpha=0.9, label='Noisy Measurement', lw=0.5)
+    ax1.set_ylabel('Signal')
+    ax1.legend(loc='upper right')
+    ax1.grid(alpha=0.2)
+    
+    # Plot 2: Adaptive Threshold
+    ax2.plot(t, np.abs(noisy_signal), 'yellow', alpha=0.6, label='|Signal|', lw=0.5)
+    ax2.plot(t, threshold, 'red', label='Adaptive Threshold', lw=1.5)
+    ax2.fill_between(t, 0, threshold, where=above_threshold, 
+                     color='green', alpha=0.3, label='Detection')
+    ax2.set_ylabel('|Signal| & Threshold')
+    ax2.legend(loc='upper right')
+    ax2.grid(alpha=0.2)
+    
+    # Plot 3: Bit Decisions
+    for i, bit in enumerate(message_bits):
+        color = 'lime' if decoded_bits[i] == message_bits[i] else 'red'
+        ax3.axvspan(i*bit_duration, (i+1)*bit_duration, 
+                   alpha=0.2, color=color)
+        ax3.text((i+0.5)*bit_duration, 0.5, 
+                f"Sent:{bit}\nRecv:{decoded_bits[i]}",
+                ha='center', va='center', fontsize=8)
+    ax3.set_xlabel('Time (s)')
+    ax3.set_ylabel('Bit Decision')
+    ax3.set_ylim(0, 1)
+    ax3.set_yticks([])
+    
+    title = (f"Coherence Telephone v2.2 – Adaptive Detection\n"
+             f"Chern {Chern_sender}→{Chern_receiver} | Drive={drive_amplitude} | BER={ber:.1%}")
+    plt.suptitle(title, fontsize=14)
+    plt.tight_layout()
+    
+    return {
+        't': t,
+        'clean': Phi_B,
+        'noisy': noisy_signal,
+        'threshold': threshold,
+        'detections': detection_points,
+        'decoded_bits': decoded_bits,
+        'ber': ber,
+        'stats': detection_stats
+    }
+
+# ====================== RUN DEMO ======================
+print("Running Adaptive Threshold Detection Demo...")
+print("="*60)
+
+# Case 1: Strong signal, matched topology
+results1 = run_simulation_with_adaptive(Chern_sender=3.0, Chern_receiver=3.0,
+                                        drive_amplitude=5.0, noise_level=0.2)
+print(f"Case 1 (Matched C=3, Strong Drive):")
+print(f"  BER: {results1['ber']:.1%}")
+print(f"  Detections: {len(results1['detections'])} points above threshold")
+print(f"  Max SNR: {np.max(np.abs(results1['noisy'])/results1['threshold']):.1f}")
+
+# Case 2: Weak signal (like your original)
+results2 = run_simulation_with_adaptive(Chern_sender=3.0, Chern_receiver=3.0,
+                                        drive_amplitude=1.0, noise_level=0.2)
+print(f"\nCase 2 (Matched C=3, Weak Drive):")
+print(f"  BER: {results2['ber']:.1%}")
+print(f"  Detections: {len(results2['detections'])} points above threshold")
+
+# Case 3: Mismatched (control)
+results3 = run_simulation_with_adaptive(Chern_sender=3.0, Chern_receiver=2.0,
+                                        drive_amplitude=5.0, noise_level=0.2)
+print(f"\nCase 3 (Mismatched C=3→2):")
+print(f"  BER: {results3['ber']:.1%}")
+print(f"  Detections: {len(results3['detections'])} (should be near zero)")
+
+plt.show()
