@@ -39,6 +39,7 @@ These documents outline the technical and architectural foundations. They repres
     * *Details on the functional form of the interaction.*
 * **[📄 Read: Coupling Constant](docs/Math/COUPLING_CONSTANT.md)**
     * *Analysis of the coupling constants.*
+* **[📄 Read: Mismatch Sweep Analysis](docs/whitepapers/MISMATCH_SWEEP_ANALYSIS.md)**
 </details>
 
 <details>
