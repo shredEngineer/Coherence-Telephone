@@ -183,7 +183,7 @@ Understanding the "Why" and the nature of the coherence field as a quantum subst
 ### 🛠️ [Section 3: Hardware & Protocols](Hardware/)
 The blueprints, grocery lists, and testing protocols required to build the device.
 * **[Phase 1 Tabletop Protocol](Hardware/PROTOCOL_Phase1_Tabletop.md)** – The $2M validation experiment.
-* **[Earth-Moon Test Protocol](Hardware/earth_moon_test_protocol.txt)** – The definitive latency test.
+* **[Earth-Moon Test Protocol](Hardware/earth_moon_test_protocol.md)** – The definitive latency test.
 * **[Hardware Grocery List ($38M)](Hardware/grocery_list_38M.txt)** – Complete Bill of Materials.
 * **[System Architecture Diagram](assets/Technical_System_Architecture_EB.png)** – Full signal chain visualization.
 
