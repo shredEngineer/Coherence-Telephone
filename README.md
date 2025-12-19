@@ -111,16 +111,16 @@ Our simulations show that the coupling efficiency scales non-linearly. Chern 1 a
 
 ## 📊 Section 7: Visual Aids & Breakthroughs
 
-**1. [The "Smoking Gun": Topology Selective Addressing](Visuals/topology_addressing.png)**
+**1. [The "Smoking Gun": Topology Selective Addressing](assets/topology_addressing.png)**
 > **Summary:** This graph proves the core hypothesis. It shows that a Sender (C=3) correlates strongly with a Receiver (C=3), but has **zero correlation** with a mismatched Control (C=2). This rules out classical electromagnetic leakage.
 
-**2. [Feasibility Landscape: Signal vs. Coupling](Visuals/signal_vs_coupling.png)**
+**2. [Feasibility Landscape: Signal vs. Coupling](assets/signal_vs_coupling.png)**
 > **Summary:** A comprehensive sweep of the parameter space. It defines the "Easy Detection" (MHz), "Feasible" (kHz), and "Challenging" (Hz) regions based on the unknown coupling constant *g*.
 
-**3. [The Mechanism: E·B vs. Entropy Coupling](Visuals/physical_coupling_simulation.png)**
+**3. [The Mechanism: E·B vs. Entropy Coupling](assets/physical_coupling_simulation.png)**
 > **Summary:** Comparing the new Axion Electrodynamics model (E·B) against the old Entropy model. The E·B method shows a **100x improvement** in sensitivity, making the experiment viable with today's hardware.
 
-**4. [The Vision: Impact Cascade](Visuals/impact_cascade.png)**
+**4. [The Vision: Impact Cascade](assets/impact_cascade.png)**
 > **Summary:** What happens if we succeed? This flowchart maps the consequences from the first 1.28s test to a "Type I Civilization" communication infrastructure.
 
 ---
