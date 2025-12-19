@@ -31,7 +31,7 @@ All hardware exists today. All math is public. All code runs on a laptop.
 ## 📂 Project Documentation
 Click the sections below to access the files.
 
-[Uploading README_BREAKTHROUGH_# 🔬 BREAKTHROUGH: Coupling Mechanism Identified
+[ 🔬 BREAKTHROUGH: Coupling Mechanism Identified
 
 <details>
 <summary><b>⚡ CLICK TO EXPAND: How Topology Couples to EM Fields — The Missing Physics</b></summary>
