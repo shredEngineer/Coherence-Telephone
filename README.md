@@ -184,7 +184,6 @@ The complete physical and mathematical framework, from the axion coupling mechan
 Understanding the "Why" and the nature of the coherence field as a quantum substrate.
 * **[The Coherence Field as Quantum Substrate](docs/Philosophy/THE_COHERENCE_FIELD_AS_QUANTUM_SUBSTRATE.md)** – Why the universe isn't weird.
 * **[The Principle of Temporal Integrity](docs/Philosophy/PRINCIPLE_TEMPORAL_INTEGRITY.md)** – Why this doesn't break causality.
-* **[Grand Unified Theory of Coherence](docs/Philosophy/coherence_field_derivation.md)** – Foundations of the Bollinger-Kerr Drive physics.
 * **[Alternative Formulation: EM Potential](docs/Philosophy/Alternative_Formulation_EM_Potential.md)** – Gauge-invariant field definitions.
 
 ### 🛠️ [Section 3: Hardware & Protocols](Hardware/)
