@@ -204,7 +204,7 @@ This is **not new physics**—it's an extension of measured phenomena:
 </details>
 
 ---
-SECTION.md…]()
+
 
 
 ### 📄 [Section 1: Core Whitepapers & Physics (Start Here)](docs/whitepapers/)
