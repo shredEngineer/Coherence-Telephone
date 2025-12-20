@@ -49,7 +49,7 @@ Just like electrons in a Chern Insulator, magnons in a ferromagnet with broken t
 * **[HARDWARE_REQUIREMENTS.md](Magnon-Implementation/HARDWARE_REQUIREMENTS.md)** – The <$50k Bill of Materials (BOM).
 * **[COST_COMPARISON.md](Magnon-Implementation/COST_COMPARISON.md)** – Financial breakdown: Why this is 10x cheaper than qubits.
 
-### 📄 Simulations (in `Magnon_Implementation/Simulations`)
+### 📄 Simulations (in `Magnon-Implementation/Simulations`)
 1.  **`magnon_hamiltonian_sweep.py`** – Proves that $\mathcal{C}=3$ is achievable in magnetic insulators.
 2.  **`magnon_full_sweep_dynamics.py`** – Demonstrates signal transfer fidelity $>99\%$ between matched YIG spheres.
 3.  **`cavity_ringdown_simulation.py`** – Predicts the specific Rabi oscillation signature for the lab experiment.
