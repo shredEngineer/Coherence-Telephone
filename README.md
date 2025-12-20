@@ -13,7 +13,8 @@ Is quantum non-locality a statistical abstraction, or a physical field?
 Currently, this debate is stuck in theory. We propose an experiment to resolve it.
  
 **Phase 1: The Tabletop Falsification Test**
-We propose a short-baseline laboratory experiment using topological insulators to detect non-local correlations that strictly obey **Topological Addressing**  $\mathcal{C}_{TX} = \mathcal{C}_{RX}$.
+We propose a short-baseline laboratory experiment using topological insulators to detect non-local correlations that strictly obey **Topological Addressing** 
+$$\mathcal{C}_{TX} = \mathcal{C}_{RX}$$ .
 * **Null Hypothesis:** No signal is detected, or signal persists when topologies are mismatched (classical leakage).
 * **Alternative Hypothesis:** Signal is detected **only** when Chern numbers match, confirming the topological coupling mechanism.
 
