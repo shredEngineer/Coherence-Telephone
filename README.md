@@ -197,15 +197,14 @@ Python simulations to validate the theory. **(Ordered by Breakdown Priority)**
 
 * **1. [Topological Coherence Enhancement (v2.3)](Simulations/Coherence%20Telephone%20v2.3%20–%20Topological%20Coherence%20Enhancement%20Simulation.py)**
     * *The Breakthrough:* Models how higher Chern numbers (C≥3) extend T2*, bridging the gap between hardware limits and protocol requirements.
-* **2. [Mismatch Sweep Analysis ("Smoking Gun")](docs/whitepapers/MISMATCH_SWEEP_ANALYSIS.md)**
+* **2. [Mismatch Sweep Analysis ("Smoking Gun")](Simulations/coupled_system_simulation.py)**
     * *The Proof:* Simulates 10,000 runs to prove that signal ONLY appears when topologies match.
-* **3. [ECC Implementation (v3.0)](Simulations/coherence_telephone_v3.0_ecc.py)**
-    * *The Practicality:* Implements Hamming(7,4) code to demonstrate error-free transmission in noisy environments.
-* **4. [Adaptive Threshold Engine (v2.2)](Simulations/v2.2_adaptive_threshold.py)**
+* **3. [ECC Implementation (v3.1)](Simulations/Coherence%20Telephone%20v3.1%20–%20Adaptive%20ECC%20for%20Realistic%20Hardware.py)**
+    * *The Practicality:* Implements Hamming(7,4) code to demonstrate error-free transmission in noisy environments (Updated to v3.1).
+* **4. [Adaptive Threshold Engine (v2.2)](Simulations/Coherence%20Telephone%20v2.2%20–%20Adaptive%20Threshold%20Detection.py)**
     * *The Realism:* Signal detection in the presence of thermal drift and 1/f noise.
 * **5. [Earth-Moon Latency Test (Final)](Simulations/earth_moon_enhanced_final.py)**
     * *The Big One:* Simulates the full 384,000 km link budget.
-
 ### 🚀 [Section 5: Roadmap & Future](ROADMAP.md)
 The development path is structured to minimize risk, with "kill gates" at each phase.
 
