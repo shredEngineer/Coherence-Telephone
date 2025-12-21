@@ -4,6 +4,9 @@
 ![Temperature](https://img.shields.io/badge/Temperature-300_K-green)
 ![Cost](https://img.shields.io/badge/Cost-<$50k-brightgreen)
 > "What if quantum 'spookiness' isn’t a bug — it’s the signature of a deeper substrate?"
+****"100 years ago this month, Heisenberg revealed the quantum veil. This experiment asks: what's behind it?"****
+
+****Heisenberg opened the quantum door in December 1925.I'm proposing we walk through it in December 2025.****
 
 The Coherence Telephone is a testable proposal:
 topologically protected qubits (Chern ≥ 3) coupled via axion
