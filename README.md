@@ -130,7 +130,7 @@ Our simulations comparing entropy-based coherence vs E·B-based coherence showed
 
 Systems with **matching Chern numbers** show high correlation. Mismatched systems show low correlation.
 
-![Topology Addressing](Visuals/topology_addressing.png)
+![Topology Addressing](assets/topology_addressing.png)
 
 **Key finding:** Node A (𝒞=3) correlates strongly with Node B (𝒞=3), but weakly with Node C (𝒞=2).
 
@@ -138,19 +138,19 @@ Systems with **matching Chern numbers** show high correlation. Mismatched system
 
 E·B-based detection dramatically outperforms entropy-based detection.
 
-![Coupling Comparison](Visuals/coupling_comparison.png)
+![Coupling Comparison](assets/coupling_comparison.png)
 
 ### 3. Chern Number Scaling
 
 Higher Chern numbers provide stronger coupling and cleaner signals.
 
-![Chern Coupling](Visuals/chern_coupling_strength.png)
+![Chern Coupling](assets/chern_coupling_strength.png)
 
 **This is why 𝒞 ≥ 3 is specified in the protocol.**
 
 ### 4. The Complete Coupling Chain
 
-![Coupling Chain](Visuals/coupling_chain.png)
+![Coupling Chain](assets/coupling_chain.png)
 
 ---
 
