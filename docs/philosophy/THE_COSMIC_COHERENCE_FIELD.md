@@ -14,7 +14,7 @@ This document presents **Cosmic Coherence Field (CCF) Theory** — a complete th
 
 **This is a hypothesis.** It is not proven physics. But unlike previous formulations of similar ideas throughout human history, this one comes with an **experimental test**.
 
-The [Coherence Telephone](../README.md) experiment can falsify or support this framework. If the experiment fails, the theory dies. If it succeeds, the implications extend far beyond communication — into the foundations of gravity, quantum mechanics, and cosmology itself.
+The [Coherence Telephone](README.md) experiment can falsify or support this framework. If the experiment fails, the theory dies. If it succeeds, the implications extend far beyond communication — into the foundations of gravity, quantum mechanics, and cosmology itself.
 
 What follows is the full vision. The established physics is labeled. The hypotheses are labeled. The speculation is labeled. Judge each on its own terms.
 
