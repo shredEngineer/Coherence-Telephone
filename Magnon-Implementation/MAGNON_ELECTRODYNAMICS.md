@@ -242,9 +242,9 @@ Magnon Electrodynamics transforms the project from a "$38M moonshot" to a "$200K
 
 | Version | Date | Changes |
 |---------|------|---------|
-| 1.0 | December 2024 | Initial framework |
-| 1.1 | December 2024 | Added magnon implementation pathway |
-| 2.0 | December 2024 | Established Magnon Electrodynamics as primary experimental approach |
+| 1.0 | December 2025 | Initial framework |
+| 1.1 | December 2025 | Added magnon implementation pathway |
+| 2.0 | December 2025 | Established Magnon Electrodynamics as primary experimental approach |
 
 ---
 
