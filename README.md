@@ -796,7 +796,7 @@ As of December 2025:
 
 **Community engagement**:
 - 360+ repository clones
-- First fork by credentialed physicist (Dr. Wilhelm)
+- First fork by credentialed PhD (Dr. Wilhelm)
 - Active discussion on scientific social media
 
 **Seeking**:
