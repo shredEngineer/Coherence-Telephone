@@ -224,9 +224,10 @@ Understanding the "Why" and the nature of the coherence field as a quantum subst
 * **[The Coherence Field as Quantum Substrate](docs/Philosophy/THE_COHERENCE_FIELD_AS_QUANTUM_SUBSTRATE.md)** – Why the universe isn't weird.
 * **[The Principle of Temporal Integrity](docs/Philosophy/PRINCIPLE_TEMPORAL_INTEGRITY.md)** – Why this doesn't break causality.
 * **[Alternative Formulation: EM Potential](docs/Philosophy/Alternative_Formulation_EM_Potential.md)** – Gauge-invariant field definitions.
-* **[The Cosmic Coherence Field (CCF) Theory](docs/philosophy/THE_COSMIC_COHERENCE_FIELD.md)** – A unified framework proposing that reality emerges from a zero-entropy quantum substrate. It connects the Coherence Telephone experiment to quantum gravity, dark energy, and the measurement problem.
+* **[The Cosmic Coherence Field (CCF)](docs/philosophy/THE_COSMIC_COHERENCE_FIELD.md)** – A unified framework proposing that reality emerges from a zero-entropy quantum substrate. This document details how the Coherence Telephone validates the connection between quantum gravity, dark energy, and the measurement problem.
 * **[The Entropy-Coherence Dynamic](docs/philosophy/THE_ENTROPY_COHERENCE_DYNAMIC.md)** – Explores how spacetime emerges from the interplay between thermodynamic entropy and quantum coherence, and how topological protection creates a local reversal of this cosmic flow.
-* **[Coherence Field Resonance Feedback](docs/philosophy/THE_COHERENCE_FEEDBACK_LOOP.md)** – A theoretical model of how initial access to the Coherence Field creates a positive feedback loop, accelerating the transition from isolated consciousness to planetary integration and reducing global entropy.
+* **[The Coherence Feedback Loop](docs/philosophy/THE_COHERENCE_FEEDBACK_LOOP.md)** – A theoretical model of how initial access to the Coherence Field creates a positive feedback loop, accelerating the transition from isolated consciousness to planetary integration.
+* **[The Cosmic Wave](docs/philosophy/THE_COSMIC_WAVE.md)** – The cosmological extension of the framework. It proposes that the universe is an eternal oscillation between coherence and entropy, solving the "fine-tuning" problem and explaining the arrow of time as our perspective from inside the wave.
 ### 🛠️ [Section 3: Hardware & Protocols](Hardware/)
 The blueprints, grocery lists, and testing protocols required to build the device.
 * **[Phase 1 Tabletop Protocol](Hardware/PROTOCOL_Phase1_Tabletop.md)** – The $2M validation experiment.
