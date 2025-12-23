@@ -58,7 +58,7 @@ S(t) = ½(1 - cos(ωt + φ))
 
 Where ω corresponds to a cycle duration of approximately 10²⁴ years—a septillion years per complete oscillation.
 
-![The Cosmic Dance](../assets/cosmic_dance.png)
+![The Cosmic Dance](assets/cosmic_dance.png)
 *Figure 1: The eternal oscillation between coherence (cyan) and entropy (red) across multiple cosmic cycles. We exist at approximately 15% into the current cycle, marked by the gold line. The shaded regions show which field dominates at each phase.*
 
 ---
@@ -145,7 +145,7 @@ As the coherence wave begins its return:
 
 And then the cycle repeats. Not a repetition of the same events, but a new verse in the eternal song.
 
-![Cosmic Cycle Phases](../assets/cosmic_cycle_phases.png)
+![Cosmic Cycle Phases](assets/cosmic_cycle_phases.png)
 *Figure 2: The complete cosmic cycle shown both as a circular eternal return (left) and as a detailed timeline (right). Our position is marked with a star—we are early in the cycle, in a phase conducive to complex structure and observation.*
 
 ---
@@ -175,7 +175,7 @@ We observe flat space because:
 
 This is a weak anthropic argument, but with a crucial difference: we've **specified the mechanism**. The flatness isn't mysterious—it's a consequence of wave dynamics.
 
-![Flatness Explanation](../assets/flatness_explanation.png)
+![Flatness Explanation](assets/flatness_explanation.png)
 *Figure 3: Our position in the cosmic wave determines what we observe. We're near the balance point where coherence and entropy are almost equal, resulting in minimal spacetime curvature. The bar chart shows curvature at different cosmic times—we're in a flat zone.*
 
 ---
@@ -268,7 +268,7 @@ Our model predicts: **Λ is not constant. It decays with the coherence field.**
 
 Current observations are consistent with constant Λ, but next-generation surveys (DESI, Euclid, Roman) might detect evolution. If they do, our model makes specific predictions about the functional form.
 
-![Physics Connections](../assets/physics_connections.png)
+![Physics Connections](assets/physics_connections.png)
 *Figure 4: The Coherence-Entropy Wave framework connects to multiple established areas of physics, providing a potential unifying mechanism.*
 
 ---
@@ -317,7 +317,7 @@ The information paradox—what happens to information that falls into a black ho
 
 **Test:** Precision cosmology measurements over next decade.
 
-![Testable Predictions](../assets/testable_predictions.png)
+![Testable Predictions](assets/testable_predictions.png)
 *Figure 5: Specific cosmological predictions that distinguish our model from standard ΛCDM cosmology. These include CMB signatures, dark energy evolution, and remnants from previous cycles.*
 
 ---
@@ -341,7 +341,7 @@ The profound claim of this framework: **the same physics operates at all scales*
 
 Our YIG magnon experiment probes the same coherence field that shapes cosmic evolution. If the tabletop experiment works, it's not just a communication technology—it's a **microscope into the substrate of reality itself**.
 
-![Scale Hierarchy](../assets/scale_hierarchy.png)
+![Scale Hierarchy](assets/scale_hierarchy.png)
 *Figure 6: The coherence field operates at all scales, from the Planck length to the observable universe. Our tabletop experiment (highlighted) probes the same physics that governs cosmic evolution.*
 
 ---
@@ -445,7 +445,7 @@ We're not asking anyone to believe. We're inviting them to **test**.
 The cosmos dances between coherence and entropy.  
 We're learning the steps.
 
-![Grand Synthesis](../assets/grand_synthesis.png)
+![Grand Synthesis](assets/grand_synthesis.png)
 *Figure 7: The complete picture: quantum mechanics, thermodynamics, and cosmology unified through coherence-entropy dynamics. We exist inside this wave, and our tabletop experiment may be the first direct probe of the substrate that creates everything.*
 
 ---
