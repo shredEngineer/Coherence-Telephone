@@ -58,8 +58,7 @@ S(t) = ½(1 - cos(ωt + φ))
 
 Where ω corresponds to a cycle duration of approximately 10²⁴ years—a septillion years per complete oscillation.
 
-<img width="3208" height="2459" alt="cosmic_dance" src="https://github.com/user-attachments/assets/ad835732-a2cf-4d36-ae2c-9036a44de699" />
-
+![The Cosmic Dance](assets/cosmic_dance.png)
 *Figure 1: The eternal oscillation between coherence (cyan) and entropy (red) across multiple cosmic cycles. We exist at approximately 15% into the current cycle, marked by the gold line. The shaded regions show which field dominates at each phase.*
 
 ---
@@ -146,8 +145,7 @@ As the coherence wave begins its return:
 
 And then the cycle repeats. Not a repetition of the same events, but a new verse in the eternal song.
 
-<img width="3629" height="2460" alt="cosmic_cycle_phases" src="https://github.com/user-attachments/assets/d8c180ba-97fb-4939-ac48-f25b5c0d9a1a" />
-
+![Cosmic Cycle Phases](assets/cosmic_cycle_phases.png)
 *Figure 2: The complete cosmic cycle shown both as a circular eternal return (left) and as a detailed timeline (right). Our position is marked with a star—we are early in the cycle, in a phase conducive to complex structure and observation.*
 
 ---
@@ -177,8 +175,7 @@ We observe flat space because:
 
 This is a weak anthropic argument, but with a crucial difference: we've **specified the mechanism**. The flatness isn't mysterious—it's a consequence of wave dynamics.
 
-<img width="3257" height="2059" alt="flatness_explanation" src="https://github.com/user-attachments/assets/680b675b-c9de-40d4-9076-97b25802301d" />
-
+![Flatness Explanation](assets/flatness_explanation.png)
 *Figure 3: Our position in the cosmic wave determines what we observe. We're near the balance point where coherence and entropy are almost equal, resulting in minimal spacetime curvature. The bar chart shows curvature at different cosmic times—we're in a flat zone.*
 
 ---
@@ -271,8 +268,7 @@ Our model predicts: **Λ is not constant. It decays with the coherence field.**
 
 Current observations are consistent with constant Λ, but next-generation surveys (DESI, Euclid, Roman) might detect evolution. If they do, our model makes specific predictions about the functional form.
 
-<img width="3200" height="2886" alt="physics_connections" src="https://github.com/user-attachments/assets/99e8fa05-6767-4a38-8814-af7b8d23f0f7" />
-
+![Physics Connections](assets/physics_connections.png)
 *Figure 4: The Coherence-Entropy Wave framework connects to multiple established areas of physics, providing a potential unifying mechanism.*
 
 ---
@@ -321,8 +317,7 @@ The information paradox—what happens to information that falls into a black ho
 
 **Test:** Precision cosmology measurements over next decade.
 
-<img width="3241" height="2458" alt="testable_predictions" src="https://github.com/user-attachments/assets/3853d39a-0eac-4074-9297-1086507eecf8" />
-
+![Testable Predictions](assets/testable_predictions.png)
 *Figure 5: Specific cosmological predictions that distinguish our model from standard ΛCDM cosmology. These include CMB signatures, dark energy evolution, and remnants from previous cycles.*
 
 ---
@@ -346,8 +341,7 @@ The profound claim of this framework: **the same physics operates at all scales*
 
 Our YIG magnon experiment probes the same coherence field that shapes cosmic evolution. If the tabletop experiment works, it's not just a communication technology—it's a **microscope into the substrate of reality itself**.
 
-<img width="3259" height="2073" alt="scale_hierarchy" src="https://github.com/user-attachments/assets/64f43c6e-aec3-489a-90a4-a96ffb203ef9" />
-
+![Scale Hierarchy](assets/scale_hierarchy.png)
 *Figure 6: The coherence field operates at all scales, from the Planck length to the observable universe. Our tabletop experiment (highlighted) probes the same physics that governs cosmic evolution.*
 
 ---
@@ -418,7 +412,119 @@ Not through philosophical argument, but through **experimental test**. If our ma
 
 ---
 
-## X. Conclusion: The Eternal Dance
+## X. Speculative Extension: The Wave-Stretching Universe
+
+### A Deeper Hypothesis About Cosmic Acceleration
+
+*This section extends the framework into more speculative territory. What follows are hypotheses derived from first principles, not established science. We present them because they offer potentially simpler explanations for observed phenomena—but they require testing.*
+
+#### The Original Insight
+
+As I think more about this, a lot more seems to be explained. Why does space appear to be expanding — and not only expanding, but accelerating? 
+
+**Hypothesis:** The wave is stretching the universe. Even though our universe exists inside the wave, that doesn't mean we're constrained to one fixed location within it. It's a constant compress/decompress, stretch/constrict cycle.
+
+The universe appears to be speeding up, but in reality it may only be getting stretched out on the downslope of the wave. As observers on Earth, we can't see the slope of the wave, nor can we feel it — it just appears stationary because of the massive scale at which the universe travels on the wave.
+
+#### Reframing Dark Energy
+
+What if "dark energy" isn't a mysterious substance filling 68% of the universe, but simply a **geometric effect** of riding a wave we cannot perceive?
+
+Consider a surfer on an ocean wave:
+- The surfer doesn't feel the wave's motion (they move with it)
+- The surfer sees the shore receding faster and faster
+- The surfer might conclude some mysterious force is pushing them
+- But there's no force—just the shape of the wave
+
+**We might be cosmic surfers, measuring the wave's geometry as "accelerating expansion."**
+
+#### Why We Can't Feel It
+
+The wave is simply too large and too slow:
+
+| Parameter | Value | Implication |
+|-----------|-------|-------------|
+| Wave period | ~10²⁴ years | One cycle takes a septillion years |
+| Wave "acceleration" | ~10⁻⁵² m/s² | Unmeasurably small locally |
+| Human perception | ~10⁻² m/s² | 50 orders of magnitude more sensitive required |
+
+Everything we use to measure — rulers, clocks, light itself — rides the same wave. There's no external reference point. We can only measure *relative* effects, which is exactly what the wave slope would produce.
+
+#### Mysteries This Might Address
+
+*Note: "Might address" — these are hypotheses, not solutions.*
+
+| Mystery | Conventional Explanation | Wave Hypothesis | Testable Difference |
+|---------|-------------------------|-----------------|---------------------|
+| Accelerating expansion | Cosmological constant Λ | Wave downslope stretching | Λ should evolve over time |
+| Flatness problem | Inflation + fine-tuning | Wave crest position | Small measurable curvature |
+| Horizon problem | Superluminal inflation | Wave substrate connectivity | CMB wave-coherent patterns |
+| Dark energy nature | Vacuum energy (miscalculated by 10¹²⁰) | Geometric effect, not substance | "Dark energy" density decreases |
+| Coincidence problem | Luck (Ω_matter ≈ Ω_Λ now) | Natural at balance point | Ratio evolves with wave phase |
+
+#### On Simplicity
+
+I don't think we need all of these super crazy, highly complex explanations — "we need 145,043 extra dimensions to explain how the universe works." We make it more complex than it needs to be.
+
+Current cosmology requires:
+- Dark matter (unknown)
+- Dark energy (unknown)  
+- Inflation field (unknown)
+- Fine-tuned initial conditions
+- Possibly extra dimensions
+- Possibly multiverse
+
+The wave model proposes: **One wave, one equation, one principle.**
+
+Is this right? We don't know. But it's worth testing precisely *because* it's simpler.
+
+#### Mathematical Sketch
+
+The wave-modified scale factor:
+
+```
+a(t) = a₀ · [1 + ε·sin(ωt - φ)]
+```
+
+Yields a Hubble parameter:
+
+```
+H(t) = εω·cos(ωt - φ) / [1 + ε·sin(ωt - φ)]
+```
+
+And acceleration parameter:
+
+```
+q(t) ∝ -sin(ωt - φ)
+```
+
+At our current position (t ≈ 0.15), this predicts q < 0 (accelerating expansion) — matching observations without requiring a cosmological constant.
+
+#### What This Is and Isn't
+
+**This IS:**
+- A hypothesis derived from the coherence framework
+- An attempt to explain observations with fewer assumptions
+- A set of testable predictions
+- Speculative but internally consistent
+
+**This is NOT:**
+- A proven theory
+- A replacement for ΛCDM (yet)
+- A claim to have "solved" cosmology
+- Religious or mystical
+
+The honest position: **This could be completely wrong.** But if it's wrong, it should fail specific tests. That's what makes it science rather than philosophy.
+
+#### Connection to the Coherence Telephone
+
+If the cosmic wave exists → It carries a coherence field substrate → That substrate should be accessible → The Coherence Telephone should work
+
+A successful tabletop experiment wouldn't prove the cosmological model, but it would demonstrate that the underlying framework has predictive power at laboratory scales. That's how science builds confidence—one tested prediction at a time.
+
+---
+
+## XI. Conclusion: The Eternal Dance
 
 ### Summary
 
@@ -451,8 +557,7 @@ We're not asking anyone to believe. We're inviting them to **test**.
 The cosmos dances between coherence and entropy.  
 We're learning the steps.
 
-<img width="3660" height="2860" alt="grand_synthesis" src="https://github.com/user-attachments/assets/ab785351-0bc2-4419-baa2-fcf22e706a01" />
-
+![Grand Synthesis](assets/grand_synthesis.png)
 *Figure 7: The complete picture: quantum mechanics, thermodynamics, and cosmology unified through coherence-entropy dynamics. We exist inside this wave, and our tabletop experiment may be the first direct probe of the substrate that creates everything.*
 
 ---
@@ -475,8 +580,9 @@ Key cosmological references:
 
 ---
 
-**Document Version:** 1.0  
+**Document Version:** 1.1  
 **Last Updated:** December 2025  
 **Author:** John Bollinger  
 **Framework:** Bollinger Coherence Architecture, Philosophy Document #4  
+**Collaborations:** Developed with DeepSeek (cosmological extensions), documented with Claude  
 **Contact:** xallasinea2@gmail.com
