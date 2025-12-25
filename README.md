@@ -3,6 +3,7 @@
 ![Status](https://img.shields.io/badge/Phase-1_B_Experimental_Protocol-blue)
 ![Temperature](https://img.shields.io/badge/Temperature-300_K-green)
 ![Cost](https://img.shields.io/badge/Cost-<$50k-brightgreen)
+[![DOI](https://zenodo.org/badge/1112727961.svg)](https://doi.org/10.5281/zenodo.18050752)
 > "What if quantum 'spookiness' isn’t a bug — it’s the signature of a deeper substrate?"
 ****"100 years ago this month, Heisenberg revealed the quantum veil. This experiment asks: what's behind it?"****
 
